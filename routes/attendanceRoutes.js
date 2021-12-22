@@ -4,7 +4,7 @@ const router = express.Router();
 router.route('/')
     .get(attendanceController.getAttendance);
 
-router.route('/:id')
+router.route('/:id/:month')
     .get(attendanceController.getAttendanceById);
 
 module.exports = router;
