@@ -26,9 +26,9 @@ exports.getAttendance = async (req, res, next) => {
 
 exports.getAttendanceById = async (req, res, next) => {
     try {
-        id = req.params.id;
+        let id = req.params.id;
         id = parseInt(id);
-        let monthlyAttendance = await Attendance.find({ "userId": id, 'year': 2021, 'month': 11 });
+        let monthlyAttendance = await Attendance.find({"userId": id, 'year': 2021, 'month': 11});
         let time = 0;
         let day = 0;
         let i = 0;
