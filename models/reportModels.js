@@ -5,11 +5,17 @@ const reportSchema = new mongoose.Schema({
     month: Number,
     date: Number,
     day: Number,
+    expectedInTime: Number,
+    expectedOutTime: Number,
     inTime: Number,
     outTime: Number,
     workingTime: Number,
     lateTime: Number,
-    shift: String
+    shift: String,
+    present: {
+        type: String,
+        default: "absent"
+    }
 });
 const Report = mongoose.model('Report', reportSchema);
 module.exports = Report;
