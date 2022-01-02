@@ -6,7 +6,7 @@ router = express.Router();
 router.route('/')
     .post(scheduleController.addShift)
 
-router.route('/:month')
+router.route('/:year/:month')
     .post(scheduleController.createReport);
 
 router.route('/generate/:month')

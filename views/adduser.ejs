@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/header.ejs') %>
+<div class="container">
+    <form action="/adduser" method="post">
+        <label for="ID">ID</label>
+        <input type="text" name="userId"/>
+        <label for="name">Name</label>
+        <input type="text" name="name"/>
+        <label for="email">Email</label>
+        <input type="email" name="email"/>
+        <label for="designation">Designation</label>
+        <input type="text" name="designation"/>
+        <label for="department">Department</label>
+        <input type="text" name="department"/>
+        <label for="shift">Shift</label>
+        <input type="text" name="shift"/>
+        <input class="btn" type="submit">
+    </form>
+</div>
+<%- include('./partials/footer.ejs') %>
+</div>
+</body>
+</html>

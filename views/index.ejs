@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/header.ejs") %>
+
+<body>
+<div class="container home">
+    <p>Welcome to</p>
+    <h1>MTPS</h1>
+    <a href="/dashboard">Dashboard</a>
+    <% if (!loggedin) { %>
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+    <% } else { %>
+        <a href="/logout">Logout</a>
+    <% } %>
+</div>
+</body>
+</html>

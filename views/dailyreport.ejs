@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/header.ejs') %>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>In Time</th>
+        <th>Late</th>
+        <th>Present</th>
+    </tr>
+    <% for( let i = 0; i < data.length; i++ ) { %>
+        <tr>
+            <td><%= data[i].ID %></td>
+            <td><%= data[i].name %></td>
+            <td><%= data[i].inTime %></td>
+            <td><%= data[i].late %></td>
+            <td><%= data[i].present %></td>
+        </tr>
+    <% } %>
+</table>
+<%- include('./partials/footer.ejs') %>
+</body>
+</html>

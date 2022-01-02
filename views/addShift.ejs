@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/header.ejs") %>
+
+<div class="container">
+    <form action="/addShift" method="post">
+        <label for="id">ID</label>
+        <input type="text" name="id"/>
+        <label for="name">Name</label>
+        <input type="text" name="name"/>
+
+        <div class="inTime time">
+            <fieldset>
+                <legend>In Time</legend>
+                <label for="inTimeHour">Hour</label>
+                <input type="text" name="inTimeHour"/>
+                <label for="inTimeMinute">Minute</label>
+                <input type="text" name="inTimeMinute"/>
+            </fieldset>
+        </div>
+
+        <div class="outTime time">
+            <fieldset>
+                <legend>Out Time</legend>
+                <label for="outTimeHour">Hour</label>
+                <input type="text" name="outTimeHour"/>
+                <label for="outTimeMinute">Minute</label>
+                <input type="text" name="outTimeMinute"/>
+            </fieldset>
+        </div>
+
+        <label for="weekends">Weekends</label>
+        <input type="text" name="weekends"/>
+
+        <input class="btn" type="submit">
+    </form>
+</div>
+<%- include("./partials/footer.ejs") %>
+</body>
+</html>

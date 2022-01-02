@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/header.ejs') %>
+
+<a href="/fetch">Fetch Data</a>
+<div class="container">
+    <form action="/schedule" method="post">
+        <label for="month">Month</label>
+        <input type="number" name="month"/>
+        <label for="year">Year</label>
+        <input type="text" name="year"/>
+        <label for="off">Holidays</label>
+        <input type="text" name="off"/>
+        <input class="btn" type="submit">
+    </form>
+</div>
+<div class="container">
+    <form action="/generate" method="post">
+        <label for="month">Month</label>
+        <input type="text" name="month"/>
+        <label for="year">Year</label>
+        <input type="text" name="year"/>
+        <input class="btn" type="submit">
+    </form>
+</div>
+<%- include('./partials/footer.ejs') %>
+</body>
+</html>

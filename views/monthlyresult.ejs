@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/header.ejs') %>
+<h3> Name: <%= data[0] %></h3>
+<h3> ID: <%= data[1] %></h3>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>In Time</th>
+        <th>Out Time</th>
+        <th>Working Time</th>
+        <th>Late</th>
+        <th>Present</th>
+    </tr>
+    <% for( let i = 4; i < data.length; i++ ) { %>
+        <tr>
+            <td><%= data[i].date %></td>
+            <td><%= data[i].in_time %></td>
+            <td><%= data[i].out_time %></td>
+            <td><%= data[i].workingTime %></td>
+            <td><%= data[i].late %></td>
+            <td><%= data[i].present %></td>
+        </tr>
+    <% } %>
+</table>
+<h3> Late: <%= data[2] %></h3>
+<h3> Working Time: <%= data[3] %></h3>
+<%- include('./partials/footer.ejs') %>
+</body>
+</html>

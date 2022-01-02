@@ -2,11 +2,11 @@ const Shift = require('./../models/shiftModels');
 const Attendance = require('./../models/attendanceModels');
 const Report = require('./../models/reportModels');
 const catchAsync = require('./../utils/catchAsync');
-const AppError = require('./../utils/appError');
 const User = require('./../models/userModel');
 
 
 exports.addShift = catchAsync(async (req, res) => {
+    let off = req.body.weekends.split(',');
     const newShift = await Shift.create({
         id: req.body.id,
         name: req.body.name,
@@ -14,22 +14,18 @@ exports.addShift = catchAsync(async (req, res) => {
         inTimeMinute: req.body.inTimeMinute,
         outTimeHour: req.body.outTimeHour,
         outTimeMinute: req.body.outTimeMinute,
-        weekends: req.body.weekends
+        weekends: off
     })
-    res.status(201).json({
-        status: "success", data: {
-            shift: newShift
-        }
-    });
+    res.redirect('/addshift')
 });
 exports.createReport = catchAsync(async (req, res) => {
     const users = await User.find();
-    const month = parseInt(req.params.month);
-    let x = new Date();
-    let year = x.getFullYear();
+    const month = parseInt(req.body.month) - 1;
+    let year = parseInt(req.body.year);
     let days = new Date(year, month + 1, 0).getDate();
     let ids = [];
-    const off = req.body.off;
+    const off = req.body.off.split(',');
+    console.log(off);
     users.forEach(user => {
         ids.push(user.userId);
     })
@@ -39,7 +35,7 @@ exports.createReport = catchAsync(async (req, res) => {
         for (let j = 1; j <= days; j++) {
             let it = new Date(year, month, j, shift.inTimeHour, shift.inTimeMinute);
             let t = it.getDay();
-            if (off.find(element => element === j) || shift.weekends.find(element => element === t)) {
+            if (off.find(element => element == j) || shift.weekends.find(element => element == t)) {
                 continue;
             }
             let ot = new Date(year, month, j, shift.outTimeHour, shift.outTimeMinute);
@@ -55,14 +51,13 @@ exports.createReport = catchAsync(async (req, res) => {
             })
         }
     }
-    res.status(200).json({
-        status: "Success"
-    })
+    res.redirect('/tools')
 });
 
 exports.generate = catchAsync(async (req, res) => {
-    const month = parseInt(req.params.month);
-    const reports = await Report.find({month});
+    const month = parseInt(req.body.month) - 1;
+    const year = parseInt(req.body.year);
+    const reports = await Report.find({month, year});
     for (let x in reports) {
         const attendance = await Attendance.find({
             userId: reports[x].userId, year: reports[x].year, month: reports[x].month, date: reports[x].date
@@ -73,10 +68,8 @@ exports.generate = catchAsync(async (req, res) => {
         if (typeof attendance[0].inTime === "undefined" || typeof attendance[0].outTime === "undefined") {
             continue;
         }
-        console.log(attendance)
         let late = 0;
         let id = reports[x]._id;
-        // console.log(attendance[0].inTime)
         if (attendance[0].inTime > reports[x].expectedInTime) {
             late = attendance[0].inTime - reports[x].expectedInTime;
         }
@@ -94,7 +87,8 @@ exports.generate = catchAsync(async (req, res) => {
             new: true, runValidators: true
         });
     }
-    res.status(200).json({
-        status: "Success"
-    })
+    // res.status(200).json({
+    //     status: "Success"
+    // })
+    res.redirect('/tools')
 })

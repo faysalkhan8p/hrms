@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/header.ejs") %>
+<div class="container">
+    <form action="/monthly" method="post">
+        <label for="id">ID</label>
+        <input type="number" name="id"/>
+        <label for="month">Month</label>
+        <input type="number" name="month"/>
+        <label for="year">Year</label>
+        <input type="number" name="year"/>
+        <input class="btn" type="submit">
+    </form>
+</div>
+
+<%- include("./partials/footer.ejs") %>
+</body>
+</html>
